@@ -1,0 +1,1168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="OnlineEğitimModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_Kullanıcı_Adı" Type="varchar" MaxLength="10" />
+          <Property Name="Admin_Sifre" Type="varchar" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="tbl_AdminLog">
+          <Key>
+            <PropertyRef Name="AdminLog_id" />
+          </Key>
+          <Property Name="AdminLog_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Admin_id" Type="int" />
+          <Property Name="İşlem_id" Type="int" />
+          <Property Name="Tarih" Type="datetime" />
+          <Property Name="YapılacakDers_id" Type="int" />
+          <Property Name="Ogretmen_id" Type="int" />
+          <Property Name="Ogrenci_id" Type="int" />
+          <Property Name="Ders_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_AlınanDersler">
+          <Key>
+            <PropertyRef Name="AlınanDers_id" />
+          </Key>
+          <Property Name="AlınanDers_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogrenci_id" Type="int" />
+          <Property Name="Ders_id" Type="int" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Bolum">
+          <Key>
+            <PropertyRef Name="Bolum_id" />
+          </Key>
+          <Property Name="Bolum_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Bolum_Adı" Type="varchar" MaxLength="20" />
+          <Property Name="Fakulte_id" Type="tinyint" />
+        </EntityType>
+        <EntityType Name="tbl_Danısman">
+          <Key>
+            <PropertyRef Name="Danısman_id" />
+          </Key>
+          <Property Name="Danısman_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogrenci_id" Type="int" />
+          <Property Name="Ogretmen_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_Ders">
+          <Key>
+            <PropertyRef Name="Ders_id" />
+          </Key>
+          <Property Name="Ders_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ders_Adı" Type="varchar" MaxLength="20" />
+          <Property Name="Ogretmen_id" Type="int" />
+          <Property Name="Ogretim_id" Type="tinyint" />
+          <Property Name="Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Fakulte">
+          <Key>
+            <PropertyRef Name="Fakulte_id" />
+          </Key>
+          <Property Name="Fakulte_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Fakulte_Ad" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbl_İşlem">
+          <Key>
+            <PropertyRef Name="İşlem_id" />
+          </Key>
+          <Property Name="İşlem_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="İşlem" Type="varchar" MaxLength="100" />
+        </EntityType>
+        <EntityType Name="tbl_Mesaj">
+          <Key>
+            <PropertyRef Name="Mesaj_id" />
+          </Key>
+          <Property Name="Mesaj_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Danısman_id" Type="int" />
+          <Property Name="Mesaj" Type="varchar" MaxLength="500" />
+          <Property Name="Yanıt" Type="varchar" MaxLength="500" />
+          <Property Name="Tarih" Type="datetime" />
+          <Property Name="Ogrenci_id" Type="int" />
+          <Property Name="Durum" Type="bit" />
+          <Property Name="Yanıtlanma_Tarihi" Type="datetime" />
+        </EntityType>
+        <EntityType Name="tbl_Ogrenci">
+          <Key>
+            <PropertyRef Name="Ogrenci_id" />
+          </Key>
+          <Property Name="Ogrenci_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogrenci_Tc" Type="varchar" MaxLength="11" />
+          <Property Name="Ogrenci_No" Type="varchar" MaxLength="9" />
+          <Property Name="Ogrenci_Ad" Type="varchar" MaxLength="20" />
+          <Property Name="Ogrenci_Soyad" Type="varchar" MaxLength="20" />
+          <Property Name="Ogrenci_Durum" Type="bit" />
+        </EntityType>
+        <EntityType Name="tbl_Ogretim">
+          <Key>
+            <PropertyRef Name="Ogretim_id" />
+          </Key>
+          <Property Name="Ogretim_id" Type="tinyint" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogretim_Ad" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="tbl_Ogretmen">
+          <Key>
+            <PropertyRef Name="Ogretmen_id" />
+          </Key>
+          <Property Name="Ogretmen_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ogretmen_KullanıcıAdı" Type="varchar" MaxLength="10" />
+          <Property Name="Ogretmen_Sifre" Type="varchar" MaxLength="10" />
+          <Property Name="Ogretmen_Ad" Type="varchar" MaxLength="20" />
+          <Property Name="Ogretmen_Soyad" Type="varchar" MaxLength="20" />
+          <Property Name="Ogretmen_Durum" Type="bit" />
+          <Property Name="Bolum_id" Type="tinyint" />
+          <Property Name="Api_secret" Type="varchar" MaxLength="40" />
+          <Property Name="Api_Key" Type="varchar" MaxLength="40" />
+          <Property Name="Client" Type="varchar" MaxLength="80" />
+        </EntityType>
+        <EntityType Name="tbl_OnlineDers">
+          <Key>
+            <PropertyRef Name="OnlineDers_id" />
+          </Key>
+          <Property Name="OnlineDers_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="YapılacakDers_id" Type="int" />
+        </EntityType>
+        <EntityType Name="tbl_YapılacakDers">
+          <Key>
+            <PropertyRef Name="YapılacakDers_id" />
+          </Key>
+          <Property Name="YapılacakDers_id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ders_id" Type="int" />
+          <Property Name="Tarih_Saat" Type="datetime" />
+          <Property Name="Kapama" Type="datetime" />
+          <Property Name="Durum" Type="bit" />
+          <Property Name="Host_Link" Type="varchar" MaxLength="1000" />
+          <Property Name="Join_Link" Type="varchar" MaxLength="150" />
+        </EntityType>
+        <EntityType Name="tbl_YapılanDersLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="Ders_id" Type="int" />
+          <Property Name="Açma" Type="datetime" />
+          <Property Name="Kapama" Type="datetime" />
+        </EntityType>
+        <Association Name="FK_tbl_AdminLog_tbl_Admin">
+          <End Role="tbl_Admin" Type="Self.tbl_Admin" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="Admin_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_İşlem">
+          <End Role="tbl_İşlem" Type="Self.tbl_İşlem" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_İşlem">
+              <PropertyRef Name="İşlem_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="İşlem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ogretmen">
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_YapılacakDers">
+          <End Role="tbl_YapılacakDers" Type="Self.tbl_YapılacakDers" Multiplicity="0..1" />
+          <End Role="tbl_AdminLog" Type="Self.tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_YapılacakDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AlınanDersler_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_AlınanDersler" Type="Self.tbl_AlınanDersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_AlınanDersler">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AlınanDersler_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_AlınanDersler" Type="Self.tbl_AlınanDersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_AlınanDersler">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Bolum_tbl_Fakulte">
+          <End Role="tbl_Fakulte" Type="Self.tbl_Fakulte" Multiplicity="0..1" />
+          <End Role="tbl_Bolum" Type="Self.tbl_Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Fakulte">
+              <PropertyRef Name="Fakulte_id" />
+            </Principal>
+            <Dependent Role="tbl_Bolum">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Danısman_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_Danısman">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Danısman_tbl_Ogretmen">
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="0..1" />
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_Danısman">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ders_tbl_Ogretim">
+          <End Role="tbl_Ogretim" Type="Self.tbl_Ogretim" Multiplicity="0..1" />
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretim">
+              <PropertyRef Name="Ogretim_id" />
+            </Principal>
+            <Dependent Role="tbl_Ders">
+              <PropertyRef Name="Ogretim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ders_tbl_Ogretmen">
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="0..1" />
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_Ders">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Mesaj_tbl_Danısman">
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="0..1" />
+          <End Role="tbl_Mesaj" Type="Self.tbl_Mesaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Danısman">
+              <PropertyRef Name="Danısman_id" />
+            </Principal>
+            <Dependent Role="tbl_Mesaj">
+              <PropertyRef Name="Danısman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Mesaj_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_Mesaj" Type="Self.tbl_Mesaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_Mesaj">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ogretmen_tbl_Bolum">
+          <End Role="tbl_Bolum" Type="Self.tbl_Bolum" Multiplicity="0..1" />
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Bolum">
+              <PropertyRef Name="Bolum_id" />
+            </Principal>
+            <Dependent Role="tbl_Ogretmen">
+              <PropertyRef Name="Bolum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OnlineDers_tbl_YapılacakDers">
+          <End Role="tbl_YapılacakDers" Type="Self.tbl_YapılacakDers" Multiplicity="0..1" />
+          <End Role="tbl_OnlineDers" Type="Self.tbl_OnlineDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_YapılacakDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Principal>
+            <Dependent Role="tbl_OnlineDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_YapılacakDers_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_YapılacakDers" Type="Self.tbl_YapılacakDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_YapılacakDers">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_YapılanDersLog_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_YapılanDersLog" Type="Self.tbl_YapılanDersLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_YapılanDersLog">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineEğitimModelStoreContainer">
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_AdminLog" EntityType="Self.tbl_AdminLog" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_AlınanDersler" EntityType="Self.tbl_AlınanDersler" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Bolum" EntityType="Self.tbl_Bolum" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Danısman" EntityType="Self.tbl_Danısman" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ders" EntityType="Self.tbl_Ders" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Fakulte" EntityType="Self.tbl_Fakulte" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_İşlem" EntityType="Self.tbl_İşlem" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Mesaj" EntityType="Self.tbl_Mesaj" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ogrenci" EntityType="Self.tbl_Ogrenci" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ogretim" EntityType="Self.tbl_Ogretim" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_Ogretmen" EntityType="Self.tbl_Ogretmen" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_OnlineDers" EntityType="Self.tbl_OnlineDers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_YapılacakDers" EntityType="Self.tbl_YapılacakDers" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="tbl_YapılanDersLog" EntityType="Self.tbl_YapılanDersLog" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Admin" Association="Self.FK_tbl_AdminLog_tbl_Admin">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ders" Association="Self.FK_tbl_AdminLog_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_İşlem" Association="Self.FK_tbl_AdminLog_tbl_İşlem">
+            <End Role="tbl_İşlem" EntitySet="tbl_İşlem" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ogrenci" Association="Self.FK_tbl_AdminLog_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ogretmen" Association="Self.FK_tbl_AdminLog_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_YapılacakDers" Association="Self.FK_tbl_AdminLog_tbl_YapılacakDers">
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AlınanDersler_tbl_Ders" Association="Self.FK_tbl_AlınanDersler_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_AlınanDersler" EntitySet="tbl_AlınanDersler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AlınanDersler_tbl_Ogrenci" Association="Self.FK_tbl_AlınanDersler_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_AlınanDersler" EntitySet="tbl_AlınanDersler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Bolum_tbl_Fakulte" Association="Self.FK_tbl_Bolum_tbl_Fakulte">
+            <End Role="tbl_Fakulte" EntitySet="tbl_Fakulte" />
+            <End Role="tbl_Bolum" EntitySet="tbl_Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Danısman_tbl_Ogrenci" Association="Self.FK_tbl_Danısman_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Danısman_tbl_Ogretmen" Association="Self.FK_tbl_Danısman_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ders_tbl_Ogretim" Association="Self.FK_tbl_Ders_tbl_Ogretim">
+            <End Role="tbl_Ogretim" EntitySet="tbl_Ogretim" />
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ders_tbl_Ogretmen" Association="Self.FK_tbl_Ders_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Mesaj_tbl_Danısman" Association="Self.FK_tbl_Mesaj_tbl_Danısman">
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+            <End Role="tbl_Mesaj" EntitySet="tbl_Mesaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Mesaj_tbl_Ogrenci" Association="Self.FK_tbl_Mesaj_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_Mesaj" EntitySet="tbl_Mesaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ogretmen_tbl_Bolum" Association="Self.FK_tbl_Ogretmen_tbl_Bolum">
+            <End Role="tbl_Bolum" EntitySet="tbl_Bolum" />
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OnlineDers_tbl_YapılacakDers" Association="Self.FK_tbl_OnlineDers_tbl_YapılacakDers">
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+            <End Role="tbl_OnlineDers" EntitySet="tbl_OnlineDers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_YapılacakDers_tbl_Ders" Association="Self.FK_tbl_YapılacakDers_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_YapılanDersLog_tbl_Ders" Association="Self.FK_tbl_YapılanDersLog_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_YapılanDersLog" EntitySet="tbl_YapılanDersLog" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="OnlineEğitimModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="tbl_Admin">
+          <Key>
+            <PropertyRef Name="Admin_id" />
+          </Key>
+          <Property Name="Admin_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_Kullanıcı_Adı" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Admin_Sifre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Admin" FromRole="tbl_Admin" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <EntityType Name="tbl_AlınanDersler">
+          <Key>
+            <PropertyRef Name="AlınanDers_id" />
+          </Key>
+          <Property Name="AlınanDers_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogrenci_id" Type="Int32" />
+          <Property Name="Ders_id" Type="Int32" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="tbl_Ders" Relationship="Self.FK_tbl_AlınanDersler_tbl_Ders" FromRole="tbl_AlınanDersler" ToRole="tbl_Ders" />
+          <NavigationProperty Name="tbl_Ogrenci" Relationship="Self.FK_tbl_AlınanDersler_tbl_Ogrenci" FromRole="tbl_AlınanDersler" ToRole="tbl_Ogrenci" />
+        </EntityType>
+        <EntityType Name="tbl_Bolum">
+          <Key>
+            <PropertyRef Name="Bolum_id" />
+          </Key>
+          <Property Name="Bolum_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Bolum_Adı" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Fakulte_id" Type="Byte" />
+          <NavigationProperty Name="tbl_Fakulte" Relationship="Self.FK_tbl_Bolum_tbl_Fakulte" FromRole="tbl_Bolum" ToRole="tbl_Fakulte" />
+          <NavigationProperty Name="tbl_Ogretmen" Relationship="Self.FK_tbl_Ogretmen_tbl_Bolum" FromRole="tbl_Bolum" ToRole="tbl_Ogretmen" />
+        </EntityType>
+        <EntityType Name="tbl_Danısman">
+          <Key>
+            <PropertyRef Name="Danısman_id" />
+          </Key>
+          <Property Name="Danısman_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogrenci_id" Type="Int32" />
+          <Property Name="Ogretmen_id" Type="Int32" />
+          <NavigationProperty Name="tbl_Ogrenci" Relationship="Self.FK_tbl_Danısman_tbl_Ogrenci" FromRole="tbl_Danısman" ToRole="tbl_Ogrenci" />
+          <NavigationProperty Name="tbl_Ogretmen" Relationship="Self.FK_tbl_Danısman_tbl_Ogretmen" FromRole="tbl_Danısman" ToRole="tbl_Ogretmen" />
+          <NavigationProperty Name="tbl_Mesaj" Relationship="Self.FK_tbl_Mesaj_tbl_Danısman" FromRole="tbl_Danısman" ToRole="tbl_Mesaj" />
+        </EntityType>
+        <EntityType Name="tbl_Ders">
+          <Key>
+            <PropertyRef Name="Ders_id" />
+          </Key>
+          <Property Name="Ders_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ders_Adı" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ogretmen_id" Type="Int32" />
+          <Property Name="Ogretim_id" Type="Byte" />
+          <Property Name="Durum" Type="Boolean" />
+          <NavigationProperty Name="tbl_AlınanDersler" Relationship="Self.FK_tbl_AlınanDersler_tbl_Ders" FromRole="tbl_Ders" ToRole="tbl_AlınanDersler" />
+          <NavigationProperty Name="tbl_Ogretim" Relationship="Self.FK_tbl_Ders_tbl_Ogretim" FromRole="tbl_Ders" ToRole="tbl_Ogretim" />
+          <NavigationProperty Name="tbl_Ogretmen" Relationship="Self.FK_tbl_Ders_tbl_Ogretmen" FromRole="tbl_Ders" ToRole="tbl_Ogretmen" />
+          <NavigationProperty Name="tbl_YapılacakDers" Relationship="Self.FK_tbl_YapılacakDers_tbl_Ders" FromRole="tbl_Ders" ToRole="tbl_YapılacakDers" />
+          <NavigationProperty Name="tbl_YapılanDersLog" Relationship="Self.FK_tbl_YapılanDersLog_tbl_Ders" FromRole="tbl_Ders" ToRole="tbl_YapılanDersLog" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ders" FromRole="tbl_Ders" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <EntityType Name="tbl_Fakulte">
+          <Key>
+            <PropertyRef Name="Fakulte_id" />
+          </Key>
+          <Property Name="Fakulte_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Fakulte_Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Bolum" Relationship="Self.FK_tbl_Bolum_tbl_Fakulte" FromRole="tbl_Fakulte" ToRole="tbl_Bolum" />
+        </EntityType>
+        <EntityType Name="tbl_Mesaj">
+          <Key>
+            <PropertyRef Name="Mesaj_id" />
+          </Key>
+          <Property Name="Mesaj_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Danısman_id" Type="Int32" />
+          <Property Name="Mesaj" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Yanıt" Type="String" MaxLength="500" FixedLength="false" Unicode="false" />
+          <Property Name="Tarih" Type="DateTime" Precision="3" />
+          <Property Name="Ogrenci_id" Type="Int32" />
+          <Property Name="Durum" Type="Boolean" />
+          <Property Name="Yanıtlanma_Tarihi" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Danısman" Relationship="Self.FK_tbl_Mesaj_tbl_Danısman" FromRole="tbl_Mesaj" ToRole="tbl_Danısman" />
+          <NavigationProperty Name="tbl_Ogrenci" Relationship="Self.FK_tbl_Mesaj_tbl_Ogrenci" FromRole="tbl_Mesaj" ToRole="tbl_Ogrenci" />
+        </EntityType>
+        <EntityType Name="tbl_Ogrenci">
+          <Key>
+            <PropertyRef Name="Ogrenci_id" />
+          </Key>
+          <Property Name="Ogrenci_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogrenci_Tc" Type="String" MaxLength="11" FixedLength="false" Unicode="false" />
+          <Property Name="Ogrenci_No" Type="String" MaxLength="9" FixedLength="false" Unicode="false" />
+          <Property Name="Ogrenci_Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ogrenci_Soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ogrenci_Durum" Type="Boolean" />
+          <NavigationProperty Name="tbl_AlınanDersler" Relationship="Self.FK_tbl_AlınanDersler_tbl_Ogrenci" FromRole="tbl_Ogrenci" ToRole="tbl_AlınanDersler" />
+          <NavigationProperty Name="tbl_Danısman" Relationship="Self.FK_tbl_Danısman_tbl_Ogrenci" FromRole="tbl_Ogrenci" ToRole="tbl_Danısman" />
+          <NavigationProperty Name="tbl_Mesaj" Relationship="Self.FK_tbl_Mesaj_tbl_Ogrenci" FromRole="tbl_Ogrenci" ToRole="tbl_Mesaj" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogrenci" FromRole="tbl_Ogrenci" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <EntityType Name="tbl_Ogretim">
+          <Key>
+            <PropertyRef Name="Ogretim_id" />
+          </Key>
+          <Property Name="Ogretim_id" Type="Byte" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogretim_Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Ders" Relationship="Self.FK_tbl_Ders_tbl_Ogretim" FromRole="tbl_Ogretim" ToRole="tbl_Ders" />
+        </EntityType>
+        <EntityType Name="tbl_Ogretmen">
+          <Key>
+            <PropertyRef Name="Ogretmen_id" />
+          </Key>
+          <Property Name="Ogretmen_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ogretmen_KullanıcıAdı" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ogretmen_Sifre" Type="String" MaxLength="10" FixedLength="false" Unicode="false" />
+          <Property Name="Ogretmen_Ad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ogretmen_Soyad" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="Ogretmen_Durum" Type="Boolean" />
+          <Property Name="Bolum_id" Type="Byte" />
+          <Property Name="Api_secret" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Api_Key" Type="String" MaxLength="40" FixedLength="false" Unicode="false" />
+          <Property Name="Client" Type="String" MaxLength="80" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Bolum" Relationship="Self.FK_tbl_Ogretmen_tbl_Bolum" FromRole="tbl_Ogretmen" ToRole="tbl_Bolum" />
+          <NavigationProperty Name="tbl_Danısman" Relationship="Self.FK_tbl_Danısman_tbl_Ogretmen" FromRole="tbl_Ogretmen" ToRole="tbl_Danısman" />
+          <NavigationProperty Name="tbl_Ders" Relationship="Self.FK_tbl_Ders_tbl_Ogretmen" FromRole="tbl_Ogretmen" ToRole="tbl_Ders" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogretmen" FromRole="tbl_Ogretmen" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <EntityType Name="tbl_OnlineDers">
+          <Key>
+            <PropertyRef Name="OnlineDers_id" />
+          </Key>
+          <Property Name="OnlineDers_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="YapılacakDers_id" Type="Int32" />
+          <NavigationProperty Name="tbl_YapılacakDers" Relationship="Self.FK_tbl_OnlineDers_tbl_YapılacakDers" FromRole="tbl_OnlineDers" ToRole="tbl_YapılacakDers" />
+        </EntityType>
+        <EntityType Name="tbl_YapılacakDers">
+          <Key>
+            <PropertyRef Name="YapılacakDers_id" />
+          </Key>
+          <Property Name="YapılacakDers_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ders_id" Type="Int32" />
+          <Property Name="Tarih_Saat" Type="DateTime" Precision="3" />
+          <Property Name="Kapama" Type="DateTime" Precision="3" />
+          <Property Name="Durum" Type="Boolean" />
+          <Property Name="Host_Link" Type="String" MaxLength="1000" FixedLength="false" Unicode="false" />
+          <Property Name="Join_Link" Type="String" MaxLength="150" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_Ders" Relationship="Self.FK_tbl_YapılacakDers_tbl_Ders" FromRole="tbl_YapılacakDers" ToRole="tbl_Ders" />
+          <NavigationProperty Name="tbl_OnlineDers" Relationship="Self.FK_tbl_OnlineDers_tbl_YapılacakDers" FromRole="tbl_YapılacakDers" ToRole="tbl_OnlineDers" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_YapılacakDers" FromRole="tbl_YapılacakDers" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <EntityType Name="tbl_YapılanDersLog">
+          <Key>
+            <PropertyRef Name="id" />
+          </Key>
+          <Property Name="id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Ders_id" Type="Int32" />
+          <Property Name="Açma" Type="DateTime" Precision="3" />
+          <Property Name="Kapama" Type="DateTime" Precision="3" />
+          <NavigationProperty Name="tbl_Ders" Relationship="Self.FK_tbl_YapılanDersLog_tbl_Ders" FromRole="tbl_YapılanDersLog" ToRole="tbl_Ders" />
+        </EntityType>
+        <Association Name="FK_tbl_AlınanDersler_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_AlınanDersler" Type="Self.tbl_AlınanDersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_AlınanDersler">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AlınanDersler_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_AlınanDersler" Type="Self.tbl_AlınanDersler" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_AlınanDersler">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Bolum_tbl_Fakulte">
+          <End Role="tbl_Fakulte" Type="Self.tbl_Fakulte" Multiplicity="0..1" />
+          <End Role="tbl_Bolum" Type="Self.tbl_Bolum" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Fakulte">
+              <PropertyRef Name="Fakulte_id" />
+            </Principal>
+            <Dependent Role="tbl_Bolum">
+              <PropertyRef Name="Fakulte_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ogretmen_tbl_Bolum">
+          <End Role="tbl_Bolum" Type="Self.tbl_Bolum" Multiplicity="0..1" />
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Bolum">
+              <PropertyRef Name="Bolum_id" />
+            </Principal>
+            <Dependent Role="tbl_Ogretmen">
+              <PropertyRef Name="Bolum_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Danısman_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_Danısman">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Danısman_tbl_Ogretmen">
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="0..1" />
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_Danısman">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Mesaj_tbl_Danısman">
+          <End Role="tbl_Danısman" Type="Self.tbl_Danısman" Multiplicity="0..1" />
+          <End Role="tbl_Mesaj" Type="Self.tbl_Mesaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Danısman">
+              <PropertyRef Name="Danısman_id" />
+            </Principal>
+            <Dependent Role="tbl_Mesaj">
+              <PropertyRef Name="Danısman_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ders_tbl_Ogretim">
+          <End Role="tbl_Ogretim" Type="Self.tbl_Ogretim" Multiplicity="0..1" />
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretim">
+              <PropertyRef Name="Ogretim_id" />
+            </Principal>
+            <Dependent Role="tbl_Ders">
+              <PropertyRef Name="Ogretim_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Ders_tbl_Ogretmen">
+          <End Role="tbl_Ogretmen" Type="Self.tbl_Ogretmen" Multiplicity="0..1" />
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_Ders">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_YapılacakDers_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_YapılacakDers" Type="Self.tbl_YapılacakDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_YapılacakDers">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_YapılanDersLog_tbl_Ders">
+          <End Role="tbl_Ders" Type="Self.tbl_Ders" Multiplicity="0..1" />
+          <End Role="tbl_YapılanDersLog" Type="Self.tbl_YapılanDersLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_YapılanDersLog">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_Mesaj_tbl_Ogrenci">
+          <End Role="tbl_Ogrenci" Type="Self.tbl_Ogrenci" Multiplicity="0..1" />
+          <End Role="tbl_Mesaj" Type="Self.tbl_Mesaj" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_Mesaj">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_OnlineDers_tbl_YapılacakDers">
+          <End Role="tbl_YapılacakDers" Type="Self.tbl_YapılacakDers" Multiplicity="0..1" />
+          <End Role="tbl_OnlineDers" Type="Self.tbl_OnlineDers" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_YapılacakDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Principal>
+            <Dependent Role="tbl_OnlineDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="OnlineEğitimEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="tbl_Admin" EntityType="Self.tbl_Admin" />
+          <EntitySet Name="tbl_AlınanDersler" EntityType="Self.tbl_AlınanDersler" />
+          <EntitySet Name="tbl_Bolum" EntityType="Self.tbl_Bolum" />
+          <EntitySet Name="tbl_Danısman" EntityType="Self.tbl_Danısman" />
+          <EntitySet Name="tbl_Ders" EntityType="Self.tbl_Ders" />
+          <EntitySet Name="tbl_Fakulte" EntityType="Self.tbl_Fakulte" />
+          <EntitySet Name="tbl_Mesaj" EntityType="Self.tbl_Mesaj" />
+          <EntitySet Name="tbl_Ogrenci" EntityType="Self.tbl_Ogrenci" />
+          <EntitySet Name="tbl_Ogretim" EntityType="Self.tbl_Ogretim" />
+          <EntitySet Name="tbl_Ogretmen" EntityType="Self.tbl_Ogretmen" />
+          <EntitySet Name="tbl_OnlineDers" EntityType="Self.tbl_OnlineDers" />
+          <EntitySet Name="tbl_YapılacakDers" EntityType="Self.tbl_YapılacakDers" />
+          <EntitySet Name="tbl_YapılanDersLog" EntityType="Self.tbl_YapılanDersLog" />
+          <AssociationSet Name="FK_tbl_AlınanDersler_tbl_Ders" Association="Self.FK_tbl_AlınanDersler_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_AlınanDersler" EntitySet="tbl_AlınanDersler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AlınanDersler_tbl_Ogrenci" Association="Self.FK_tbl_AlınanDersler_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_AlınanDersler" EntitySet="tbl_AlınanDersler" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Bolum_tbl_Fakulte" Association="Self.FK_tbl_Bolum_tbl_Fakulte">
+            <End Role="tbl_Fakulte" EntitySet="tbl_Fakulte" />
+            <End Role="tbl_Bolum" EntitySet="tbl_Bolum" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ogretmen_tbl_Bolum" Association="Self.FK_tbl_Ogretmen_tbl_Bolum">
+            <End Role="tbl_Bolum" EntitySet="tbl_Bolum" />
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Danısman_tbl_Ogrenci" Association="Self.FK_tbl_Danısman_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Danısman_tbl_Ogretmen" Association="Self.FK_tbl_Danısman_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Mesaj_tbl_Danısman" Association="Self.FK_tbl_Mesaj_tbl_Danısman">
+            <End Role="tbl_Danısman" EntitySet="tbl_Danısman" />
+            <End Role="tbl_Mesaj" EntitySet="tbl_Mesaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ders_tbl_Ogretim" Association="Self.FK_tbl_Ders_tbl_Ogretim">
+            <End Role="tbl_Ogretim" EntitySet="tbl_Ogretim" />
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Ders_tbl_Ogretmen" Association="Self.FK_tbl_Ders_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_YapılacakDers_tbl_Ders" Association="Self.FK_tbl_YapılacakDers_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_YapılanDersLog_tbl_Ders" Association="Self.FK_tbl_YapılanDersLog_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_YapılanDersLog" EntitySet="tbl_YapılanDersLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_Mesaj_tbl_Ogrenci" Association="Self.FK_tbl_Mesaj_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_Mesaj" EntitySet="tbl_Mesaj" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_OnlineDers_tbl_YapılacakDers" Association="Self.FK_tbl_OnlineDers_tbl_YapılacakDers">
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+            <End Role="tbl_OnlineDers" EntitySet="tbl_OnlineDers" />
+          </AssociationSet>
+          <EntitySet Name="tbl_AdminLog" EntityType="OnlineEğitimModel.tbl_AdminLog" />
+          <EntitySet Name="tbl_İşlem" EntityType="OnlineEğitimModel.tbl_İşlem" />
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Admin" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Admin">
+            <End Role="tbl_Admin" EntitySet="tbl_Admin" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ders" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ders">
+            <End Role="tbl_Ders" EntitySet="tbl_Ders" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_İşlem" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_İşlem">
+            <End Role="tbl_İşlem" EntitySet="tbl_İşlem" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ogrenci" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogrenci">
+            <End Role="tbl_Ogrenci" EntitySet="tbl_Ogrenci" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_Ogretmen" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogretmen">
+            <End Role="tbl_Ogretmen" EntitySet="tbl_Ogretmen" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+          <AssociationSet Name="FK_tbl_AdminLog_tbl_YapılacakDers" Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_YapılacakDers">
+            <End Role="tbl_YapılacakDers" EntitySet="tbl_YapılacakDers" />
+            <End Role="tbl_AdminLog" EntitySet="tbl_AdminLog" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="tbl_AdminLog">
+          <Key>
+            <PropertyRef Name="AdminLog_id" />
+          </Key>
+          <Property Name="AdminLog_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="Admin_id" Type="Int32" />
+          <Property Name="İşlem_id" Type="Int32" />
+          <Property Name="Tarih" Type="DateTime" Precision="3" />
+          <Property Name="YapılacakDers_id" Type="Int32" />
+          <Property Name="Ogretmen_id" Type="Int32" />
+          <Property Name="Ogrenci_id" Type="Int32" />
+          <Property Name="Ders_id" Type="Int32" />
+          <NavigationProperty Name="tbl_Admin" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Admin" FromRole="tbl_AdminLog" ToRole="tbl_Admin" />
+          <NavigationProperty Name="tbl_Ders" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ders" FromRole="tbl_AdminLog" ToRole="tbl_Ders" />
+          <NavigationProperty Name="tbl_İşlem" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_İşlem" FromRole="tbl_AdminLog" ToRole="tbl_İşlem" />
+          <NavigationProperty Name="tbl_Ogrenci" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogrenci" FromRole="tbl_AdminLog" ToRole="tbl_Ogrenci" />
+          <NavigationProperty Name="tbl_Ogretmen" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogretmen" FromRole="tbl_AdminLog" ToRole="tbl_Ogretmen" />
+          <NavigationProperty Name="tbl_YapılacakDers" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_YapılacakDers" FromRole="tbl_AdminLog" ToRole="tbl_YapılacakDers" />
+        </EntityType>
+        <EntityType Name="tbl_İşlem">
+          <Key>
+            <PropertyRef Name="İşlem_id" />
+          </Key>
+          <Property Name="İşlem_id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="İşlem" Type="String" MaxLength="100" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="tbl_AdminLog" Relationship="OnlineEğitimModel.FK_tbl_AdminLog_tbl_İşlem" FromRole="tbl_İşlem" ToRole="tbl_AdminLog" />
+        </EntityType>
+        <Association Name="FK_tbl_AdminLog_tbl_Admin">
+          <End Type="OnlineEğitimModel.tbl_Admin" Role="tbl_Admin" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Admin">
+              <PropertyRef Name="Admin_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Admin_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ders">
+          <End Type="OnlineEğitimModel.tbl_Ders" Role="tbl_Ders" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ders">
+              <PropertyRef Name="Ders_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ders_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_İşlem">
+          <End Type="OnlineEğitimModel.tbl_İşlem" Role="tbl_İşlem" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_İşlem">
+              <PropertyRef Name="İşlem_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="İşlem_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ogrenci">
+          <End Type="OnlineEğitimModel.tbl_Ogrenci" Role="tbl_Ogrenci" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogrenci">
+              <PropertyRef Name="Ogrenci_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ogrenci_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_Ogretmen">
+          <End Type="OnlineEğitimModel.tbl_Ogretmen" Role="tbl_Ogretmen" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_Ogretmen">
+              <PropertyRef Name="Ogretmen_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="Ogretmen_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_tbl_AdminLog_tbl_YapılacakDers">
+          <End Type="OnlineEğitimModel.tbl_YapılacakDers" Role="tbl_YapılacakDers" Multiplicity="0..1" />
+          <End Type="OnlineEğitimModel.tbl_AdminLog" Role="tbl_AdminLog" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="tbl_YapılacakDers">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Principal>
+            <Dependent Role="tbl_AdminLog">
+              <PropertyRef Name="YapılacakDers_id" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="OnlineEğitimModelStoreContainer" CdmEntityContainer="OnlineEğitimEntities">
+          <EntitySetMapping Name="tbl_Admin">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Admin">
+              <MappingFragment StoreEntitySet="tbl_Admin">
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="Admin_Kullanıcı_Adı" ColumnName="Admin_Kullanıcı_Adı" />
+                <ScalarProperty Name="Admin_Sifre" ColumnName="Admin_Sifre" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AlınanDersler">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_AlınanDersler">
+              <MappingFragment StoreEntitySet="tbl_AlınanDersler">
+                <ScalarProperty Name="AlınanDers_id" ColumnName="AlınanDers_id" />
+                <ScalarProperty Name="Ogrenci_id" ColumnName="Ogrenci_id" />
+                <ScalarProperty Name="Ders_id" ColumnName="Ders_id" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Bolum">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Bolum">
+              <MappingFragment StoreEntitySet="tbl_Bolum">
+                <ScalarProperty Name="Bolum_id" ColumnName="Bolum_id" />
+                <ScalarProperty Name="Bolum_Adı" ColumnName="Bolum_Adı" />
+                <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Danısman">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Danısman">
+              <MappingFragment StoreEntitySet="tbl_Danısman">
+                <ScalarProperty Name="Danısman_id" ColumnName="Danısman_id" />
+                <ScalarProperty Name="Ogrenci_id" ColumnName="Ogrenci_id" />
+                <ScalarProperty Name="Ogretmen_id" ColumnName="Ogretmen_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ders">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Ders">
+              <MappingFragment StoreEntitySet="tbl_Ders">
+                <ScalarProperty Name="Ders_id" ColumnName="Ders_id" />
+                <ScalarProperty Name="Ders_Adı" ColumnName="Ders_Adı" />
+                <ScalarProperty Name="Ogretmen_id" ColumnName="Ogretmen_id" />
+                <ScalarProperty Name="Ogretim_id" ColumnName="Ogretim_id" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Fakulte">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Fakulte">
+              <MappingFragment StoreEntitySet="tbl_Fakulte">
+                <ScalarProperty Name="Fakulte_id" ColumnName="Fakulte_id" />
+                <ScalarProperty Name="Fakulte_Ad" ColumnName="Fakulte_Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Mesaj">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Mesaj">
+              <MappingFragment StoreEntitySet="tbl_Mesaj">
+                <ScalarProperty Name="Mesaj_id" ColumnName="Mesaj_id" />
+                <ScalarProperty Name="Danısman_id" ColumnName="Danısman_id" />
+                <ScalarProperty Name="Mesaj" ColumnName="Mesaj" />
+                <ScalarProperty Name="Yanıt" ColumnName="Yanıt" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="Ogrenci_id" ColumnName="Ogrenci_id" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Yanıtlanma_Tarihi" ColumnName="Yanıtlanma_Tarihi" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ogrenci">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Ogrenci">
+              <MappingFragment StoreEntitySet="tbl_Ogrenci">
+                <ScalarProperty Name="Ogrenci_id" ColumnName="Ogrenci_id" />
+                <ScalarProperty Name="Ogrenci_Tc" ColumnName="Ogrenci_Tc" />
+                <ScalarProperty Name="Ogrenci_No" ColumnName="Ogrenci_No" />
+                <ScalarProperty Name="Ogrenci_Ad" ColumnName="Ogrenci_Ad" />
+                <ScalarProperty Name="Ogrenci_Soyad" ColumnName="Ogrenci_Soyad" />
+                <ScalarProperty Name="Ogrenci_Durum" ColumnName="Ogrenci_Durum" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ogretim">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Ogretim">
+              <MappingFragment StoreEntitySet="tbl_Ogretim">
+                <ScalarProperty Name="Ogretim_id" ColumnName="Ogretim_id" />
+                <ScalarProperty Name="Ogretim_Ad" ColumnName="Ogretim_Ad" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_Ogretmen">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_Ogretmen">
+              <MappingFragment StoreEntitySet="tbl_Ogretmen">
+                <ScalarProperty Name="Ogretmen_id" ColumnName="Ogretmen_id" />
+                <ScalarProperty Name="Ogretmen_KullanıcıAdı" ColumnName="Ogretmen_KullanıcıAdı" />
+                <ScalarProperty Name="Ogretmen_Sifre" ColumnName="Ogretmen_Sifre" />
+                <ScalarProperty Name="Ogretmen_Ad" ColumnName="Ogretmen_Ad" />
+                <ScalarProperty Name="Ogretmen_Soyad" ColumnName="Ogretmen_Soyad" />
+                <ScalarProperty Name="Ogretmen_Durum" ColumnName="Ogretmen_Durum" />
+                <ScalarProperty Name="Bolum_id" ColumnName="Bolum_id" />
+                <ScalarProperty Name="Api_secret" ColumnName="Api_secret" />
+                <ScalarProperty Name="Api_Key" ColumnName="Api_Key" />
+                <ScalarProperty Name="Client" ColumnName="Client" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_OnlineDers">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_OnlineDers">
+              <MappingFragment StoreEntitySet="tbl_OnlineDers">
+                <ScalarProperty Name="OnlineDers_id" ColumnName="OnlineDers_id" />
+                <ScalarProperty Name="YapılacakDers_id" ColumnName="YapılacakDers_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_YapılacakDers">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_YapılacakDers">
+              <MappingFragment StoreEntitySet="tbl_YapılacakDers">
+                <ScalarProperty Name="YapılacakDers_id" ColumnName="YapılacakDers_id" />
+                <ScalarProperty Name="Ders_id" ColumnName="Ders_id" />
+                <ScalarProperty Name="Tarih_Saat" ColumnName="Tarih_Saat" />
+                <ScalarProperty Name="Kapama" ColumnName="Kapama" />
+                <ScalarProperty Name="Durum" ColumnName="Durum" />
+                <ScalarProperty Name="Host_Link" ColumnName="Host_Link" />
+                <ScalarProperty Name="Join_Link" ColumnName="Join_Link" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_YapılanDersLog">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_YapılanDersLog">
+              <MappingFragment StoreEntitySet="tbl_YapılanDersLog">
+                <ScalarProperty Name="id" ColumnName="id" />
+                <ScalarProperty Name="Ders_id" ColumnName="Ders_id" />
+                <ScalarProperty Name="Açma" ColumnName="Açma" />
+                <ScalarProperty Name="Kapama" ColumnName="Kapama" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_AdminLog">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_AdminLog">
+              <MappingFragment StoreEntitySet="tbl_AdminLog">
+                <ScalarProperty Name="Ders_id" ColumnName="Ders_id" />
+                <ScalarProperty Name="Ogrenci_id" ColumnName="Ogrenci_id" />
+                <ScalarProperty Name="Ogretmen_id" ColumnName="Ogretmen_id" />
+                <ScalarProperty Name="YapılacakDers_id" ColumnName="YapılacakDers_id" />
+                <ScalarProperty Name="Tarih" ColumnName="Tarih" />
+                <ScalarProperty Name="İşlem_id" ColumnName="İşlem_id" />
+                <ScalarProperty Name="Admin_id" ColumnName="Admin_id" />
+                <ScalarProperty Name="AdminLog_id" ColumnName="AdminLog_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="tbl_İşlem">
+            <EntityTypeMapping TypeName="OnlineEğitimModel.tbl_İşlem">
+              <MappingFragment StoreEntitySet="tbl_İşlem">
+                <ScalarProperty Name="İşlem" ColumnName="İşlem" />
+                <ScalarProperty Name="İşlem_id" ColumnName="İşlem_id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

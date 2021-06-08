@@ -1,0 +1,27 @@
+﻿@model Proje.Models.admin.OgrenciClass
+
+
+
+@Html.HiddenFor(x => x.Ogrenci.Ogrenci_id)
+<div class="col-md-12">
+    <div>
+        <label>@(Model.Ogrenci.Ogrenci_Ad + " " + Model.Ogrenci.Ogrenci_Soyad + " Aldığı Dersler: ")</label>
+        <ul>
+            @foreach (var item in Model.List_Ders)
+            {
+                <li style="float:left">@item.tbl_Ders.Ders_Adı</li> <br />
+            }
+        </ul>
+    </div>
+    <div>
+        <label>Ders Ekle:</label>
+    </div>
+    <div>
+        @Html.DropDownListFor(x => x.Ders.Ders_id, (List<SelectListItem>)ViewBag.AlmadığıDersList,
+                new { @class = "form-control" })
+        <br />
+
+    </div>
+
+</div>
+

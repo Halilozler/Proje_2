@@ -1,0 +1,41 @@
+﻿
+@model Proje.Models.EntityFramework.tbl_YapılacakDers
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+
+@using (Html.BeginForm("Index", "RandevuAl", FormMethod.Post))
+{
+    <h2> Yeni Randevu Al</h2>
+
+
+
+    <br />
+
+
+
+    <label> Ders Seçiniz: </label>
+    @Html.DropDownListFor(x => x.tbl_Ders.Ders_id, (List<SelectListItem>)ViewBag.ders,
+    new { @class = "form-control" })
+
+    <br />
+
+
+
+    <label> Tarih ve Saat Seçiniz: </label>
+    <input type="datetime-local" name="Tarih_Saat" class="form-control" value=@ViewBag.YazılacakZaman>
+
+    <br />
+
+    <button class="view btn btn-primary">Kaydet</button>
+    <br />
+
+}
+
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])

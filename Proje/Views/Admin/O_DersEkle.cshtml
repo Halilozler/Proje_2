@@ -1,0 +1,35 @@
+﻿@model Proje.Models.admin.OgretmenClass
+
+@Html.HiddenFor(x => x.ogretmen.Ogretmen_id)
+
+@if (ViewBag.BosDers.Count == 0)
+{
+    <div class="col-md-12">
+        <div>
+            <label>Boşta Kalan Ders Yoktur.</label>
+        </div>
+    </div>
+
+    <button type="button" class="btn btn-danger" data-dismiss="modal">Çık</button>
+}
+else
+{
+    <div class="col-md-12">
+        <div>
+            <label>@(Model.ogretmen.Ogretmen_Ad + " " + Model.ogretmen.Ogretmen_Soyad) </label>
+            <label>(Sadece Öğretmeni Olmayan Dersler Eklenebilir)</label>
+        </div>
+        <div>
+            <label>Ders Seç:</label>
+        </div>
+        <div>
+            @Html.DropDownListFor(x => x.ders.Ders_id, (List<SelectListItem>)ViewBag.BosDers,
+                    new { @class = "form-control" })
+            <br />
+        </div>
+    </div>
+    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Vazgeç</button>
+    <button type="submit" class="btn btn-info" style="float: right; margin-right: 10px">Ekle</button>
+    
+}
+

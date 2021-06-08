@@ -1,0 +1,214 @@
+﻿@using Proje.Models.admin
+@model OgrenciClass
+
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+@using (Html.BeginForm("Ogrenci_Listesi", "Admin", FormMethod.Get))
+{
+    <p>
+        Öğrenci No: @Html.TextBox("p")
+        <input type="submit" value="Ara" />
+    </p>
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Öğrenci No</th>
+        <th>Öğrenci Adı</th>
+        <th>Ders Ekle</th>
+        <th>Ders Sil</th>
+    </tr>
+    @foreach (var item in Model.List_Ogrenci)
+    {
+        <tr>
+            <td>@item.Ogrenci_No</td>
+            <td>@item.Ogrenci_Ad @item.Ogrenci_Soyad</td>
+            <td>
+                <a class="view btn btn-success" id="@item.Ogrenci_id" data-target="/Admin/DersEkle/@item.Ogrenci_id">Ders Ekle</a>
+            </td>
+            <td>
+                <a class="view2 btn btn-danger" id="@item.Ogrenci_id" data-target="/Admin/DersSil/@item.Ogrenci_id">Dersini Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+<br />
+
+<div style="float:right">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+
+        Öğrenci Ekle
+
+    </button>
+    <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#Modal2">
+
+        Öğrenci Sil
+
+    </button>
+</div> @*Altaki Buttonlar*@
+
+<div class="modal" id="Modal1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 class="modal-title">Öğrenci Ekle</h2>
+
+            </div>
+
+            @using (Html.BeginForm("Ogrenci_Ekleme", "Admin", FormMethod.Post))
+            {
+
+                <div class="modal-body">
+
+                    <label>Öğrenci Adı: </label>
+                    @Html.TextBoxFor(x => x.Ogrenci.Ogrenci_Ad, new { placeholder = "Öğrenci Adı", @class = "form-control" })
+
+                    <br />
+                    <label>Öğrenci Soyadı: </label>
+                    @Html.TextBoxFor(x => x.Ogrenci.Ogrenci_Soyad, new { placeholder = "Öğrenci Soyadı", @class = "form-control" })
+
+                    <br />
+                    <label>Öğrenci Tc: </label>
+                    @Html.TextBoxFor(x => x.Ogrenci.Ogrenci_Tc, new { placeholder = "Öğrenci Tc", @class = "form-control" })
+
+                    <br />
+                    <label>Öğrenci No: </label>
+                    @Html.TextBoxFor(x => x.Ogrenci.Ogrenci_No, new { placeholder = "Öğrenci No", @class = "form-control" })
+
+                    <br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Vazgeç</button>
+                    <button type="submit" class="btn btn-info" style="float: right; margin-right: 10px">Kaydet</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div> @*Öğrenci ekleme*@
+
+<div class="modal" id="Modal2">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 class="modal-title">Öğrenci Silme</h2>
+
+            </div>
+
+            @using (Html.BeginForm("Ogrenci_Silme", "Admin", FormMethod.Post))
+            {
+
+                <div class="modal-body">
+
+                    <label>Öğrenci No Giriniz: </label>
+                    @Html.TextBoxFor(x => x.No, new { placeholder = "Öğrenci No", @class = "form-control" })
+                    @*@Html.DropDownListFor(x => x.Ogrenci.Ogrenci_id, (List<SelectListItem>)ViewBag.ogrenci,
+                        new { @class = "form-control" })*@
+                    <br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Vazgeç</button>
+                    <button type="submit" class="btn btn-info" style="float: right; margin-right: 10px">Sil</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div> @*Öğrenci silme*@
+
+<div class="modal fade" id="modelView" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form method="post" action="Ekle">
+                <div class="modal-body">
+                    @*dinamik yapı buraya geliyor*@
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Ekle</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>     @*Öğrenci Ders Ekleme PopUp*@
+
+<div class="modal fade" id="modelView2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form method="post" action="DersiniSil">
+                <div class="modal-body">
+                    @*dinamik yapı buraya geliyor*@
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Sil</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    @*Öğrenci Ders Silme PopUp*@
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])
+
+
+<script>
+    $(function () {
+        $("body").on("click", ".view", function () {
+            var url = $(this).data("target");
+
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#modelView .modal-body").html(data);
+                    $("#modelView").modal("show");
+                })
+                .fail(function () {
+                    $("#modelView .modal-body").text("Error!!");
+                    $("#modelView").modal("show");
+                })
+        });
+    })
+</script>
+
+<script>
+    $(function () {
+        $("body").on("click", ".view2", function () {
+            var url = $(this).data("target");
+
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#modelView2 .modal-body").html(data);
+                    $("#modelView2").modal("show");
+                })
+                .fail(function () {
+                    $("#modelView2 .modal-body").text("Error!!");
+                    $("#modelView2").modal("show");
+                })
+        });
+    })
+</script>
+
+

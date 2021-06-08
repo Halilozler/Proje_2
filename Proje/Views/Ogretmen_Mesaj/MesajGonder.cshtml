@@ -1,0 +1,17 @@
+﻿@model Proje.Models.EntityFramework.tbl_Mesaj
+
+@Html.HiddenFor(x => x.Mesaj_id)
+<div class="col-md-12">
+    <div>
+        <label>Öğrenci Adı</label>
+        <p>@(Model.tbl_Ogrenci.Ogrenci_Ad + " " + Model.tbl_Ogrenci.Ogrenci_Soyad)</p>
+    </div>
+    <div>
+        <label>Mesajı:</label>
+        <p>@Model.Mesaj</p>
+    </div>
+    <div>
+        <label>Yanıtınız:</label>
+        @Html.TextAreaFor(x => x.Y_Mesaj, new { @class = "form-control" })
+    </div>
+</div>

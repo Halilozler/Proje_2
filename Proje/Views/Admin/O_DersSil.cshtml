@@ -1,0 +1,18 @@
+﻿@model Proje.Models.admin.OgretmenClass
+
+
+
+<div class="col-md-12">
+    <div>
+        <label>@(Model.ogretmen.Ogretmen_Ad + " " + Model.ogretmen.Ogretmen_Soyad + " Verdiği Dersler: (Randevusu Var İse Gözükmez)") </label>
+    </div><br />
+    <div>
+        <label>Ders Seç:</label>
+    </div>
+    <div>
+        @Html.DropDownListFor(x => x.ders.Ders_id, (List<SelectListItem>)ViewBag.OgretmenAlınanDers,
+                new { @class = "form-control" })
+        <br />
+    </div>
+</div>
+

@@ -1,0 +1,112 @@
+﻿
+@using Proje.Models
+@model mesaj
+
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+@if (Model.Gelenler.Count != 0)
+{
+
+    <table class="table table-bordered">
+        <thead>
+            <h3>Gelen Mesajlar</h3>
+            <tr>
+                <th>Mesaj Gönderen Öğrenci</th>
+                <th>Mesaj</th>
+                <th>Gönderilme Tarih</th>
+                <th>Yanıtla</th>
+            </tr>
+        </thead>
+        @foreach (var item in Model.Gelenler)
+        {
+            <tr>
+                <td>@(item.tbl_Ogrenci.Ogrenci_Ad + " " + item.tbl_Ogrenci.Ogrenci_Soyad)</td>
+                <td>@item.Mesaj</td>
+                <td>@item.Tarih</td>
+                <td>
+                    <a class="view btn btn-success" id="@item.Mesaj_id" data-target="/Ogretmen_Mesaj/MesajGonder/@item.Mesaj_id">Yanıtla</a>
+                </td>
+            </tr>
+        }
+    </table>
+
+}
+@if (Model.Yanıtlananlar.Count != 0)
+{
+    <table class="table table-bordered">
+        <thead>
+            <h3>Yanıtlananlar</h3>
+            <tr>
+                <th>Mesaj Gönderen Öğrenci</th>
+                <th>Mesaj</th>
+                <th>Gönderilme Tarih</th>
+                <th>Yanıtlanma Tarih</th>
+                <th>Yanıt</th>
+            </tr>
+        </thead>
+        @for (int i = Model.Yanıtlananlar.Count - 1; i >= 0; i--)
+        {
+            <tr>
+                <td>@(Model.Yanıtlananlar[i].tbl_Ogrenci.Ogrenci_Ad + " " + Model.Yanıtlananlar[i].tbl_Ogrenci.Ogrenci_Soyad)</td>
+                <td>@Model.Yanıtlananlar[i].Mesaj</td>
+                <td>@Model.Yanıtlananlar[i].Tarih</td>
+                <td>@Model.Yanıtlananlar[i].Yanıtlanma_Tarihi</td>
+                <td>@Model.Yanıtlananlar[i].Yanıt</td>
+            </tr>
+        }
+        
+    </table>
+}
+
+
+
+<div class="modal fade" id="modelView" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form method="post" action="Yanıt">
+                <div class="modal-body">
+                    @*dinamik yapı buraya geliyor*@
+                </div>
+                <div class="modal-footer">
+                    <button type="submit">
+                        Yanıtla
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>      @*Yanıtla pop Upı*@
+
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+
+@Html.Raw(TempData["msg"])
+
+<script>
+    $(function () {
+        $("body").on("click", ".view", function () {
+            var url = $(this).data("target");   //TARGETA İD GÖNDERİYOR.
+
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#modelView .modal-body").html(data); //modelimizin çinde ilgili yere yükler
+                    $("#modelView").modal("show");          //Modeli gösterir
+                })
+                .fail(function () {
+                    $("#modelView .modal-body").text("Error!!");
+                    $("#modelView").modal("show");
+                })
+        });
+    })
+
+</script>

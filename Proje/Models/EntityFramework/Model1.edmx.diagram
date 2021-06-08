@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="2b0ca0d52eae449dbaa9740c5076560e" Name="Diagram1" ZoomLevel="57">
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Admin" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_AlınanDersler" Width="1.5" PointX="15.75" PointY="4.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Bolum" Width="1.5" PointX="3" PointY="6.5" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Danısman" Width="1.5" PointX="7.5" PointY="6.375" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Ders" Width="1.5" PointX="10.5" PointY="6" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Fakulte" Width="1.5" PointX="0.75" PointY="6.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Mesaj" Width="1.5" PointX="12.75" PointY="3" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Ogrenci" Width="1.5" PointX="5.25" PointY="2.125" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Ogretim" Width="1.5" PointX="8.25" PointY="3.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_Ogretmen" Width="1.5" PointX="5.25" PointY="5.75" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_OnlineDers" Width="1.5" PointX="15" PointY="8.25" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_YapılacakDers" Width="1.5" PointX="12.75" PointY="7.625" IsExpanded="true" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_YapılanDersLog" Width="1.5" PointX="12.75" PointY="11.125" IsExpanded="true" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AlınanDersler_tbl_Ders" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AlınanDersler_tbl_Ogrenci" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Bolum_tbl_Fakulte" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Ogretmen_tbl_Bolum" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Danısman_tbl_Ogrenci" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Danısman_tbl_Ogretmen" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Mesaj_tbl_Danısman" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Ders_tbl_Ogretim" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Ders_tbl_Ogretmen" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_YapılacakDers_tbl_Ders" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_YapılanDersLog_tbl_Ders" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_Mesaj_tbl_Ogrenci" ManuallyRouted="false" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_OnlineDers_tbl_YapılacakDers" ManuallyRouted="false" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_AdminLog" Width="1.5" PointX="18" PointY="3.75" />
+        <EntityTypeShape EntityType="OnlineEğitimModel.tbl_İşlem" Width="1.5" PointX="15.75" PointY="1.875" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Admin" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ders" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_İşlem" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogrenci" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_Ogretmen" />
+        <AssociationConnector Association="OnlineEğitimModel.FK_tbl_AdminLog_tbl_YapılacakDers" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

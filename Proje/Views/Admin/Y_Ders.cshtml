@@ -1,0 +1,25 @@
+﻿@using Proje.Models.EntityFramework
+@model List<tbl_YapılanDersLog>
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+<table class="table table-bordered">
+    <tr>
+        <th>Ders Adı</th>
+        <th>Öğretmen Adı</th>
+        <th>Yapıldığı Tarih</th>
+    </tr>
+    @for (int i = Model.Count - 1; i >= 0; i--)
+    {
+        <tr>
+            <td>@Model[i].tbl_Ders.Ders_Adı</td>
+            <td>@Model[i].tbl_Ders.tbl_Ogretmen.Ogretmen_Ad @Model[i].tbl_Ders.tbl_Ogretmen.Ogretmen_Soyad</td>
+            <td>@Model[i].Açma</td>
+        </tr>
+    }
+    
+</table>
+

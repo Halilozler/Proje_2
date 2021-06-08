@@ -1,0 +1,105 @@
+﻿
+@using Proje.Models
+@model mesaj
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ogrenci.cshtml";
+}
+
+<div>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1" style="margin-left:20px">
+
+        Danışmanına Mesaj Gönder
+
+    </button>
+</div>
+<div class="container">
+    <table class="table table-bordered">
+        <thead>
+            <h3>Yanıtlanan Mesajlar</h3>
+            <tr>
+                <th>Danışman Adı</th>
+                <th>Yanıt</th>
+                <th>Yanıtlanma Tarih</th>
+                <th>Mesajınız</th>
+            </tr>
+        </thead>
+        @for (int i = Model.Yanıtlananlar.Count - 1; i >= 0; i--)
+        {
+            <tr>
+                <td>@(Model.Yanıtlananlar[i].tbl_Danısman.tbl_Ogretmen.Ogretmen_Ad + " " + Model.Yanıtlananlar[i].tbl_Danısman.tbl_Ogretmen.Ogretmen_Soyad)</td>
+                <td>@Model.Yanıtlananlar[i].Yanıt</td>
+                <td>@Model.Yanıtlananlar[i].Yanıtlanma_Tarihi</td>
+                <td>@Model.Yanıtlananlar[i].Mesaj</td>
+            </tr>
+        }
+    </table>
+    <table class="table table-bordered">
+        <thead>
+            <h3>Gönderilen Mesajlar</h3>
+            <tr>
+                <th>Mesaj</th>
+                <th>Gönderilme Tarih</th>
+            </tr>
+        </thead>
+        @for (int i = Model.Gelenler.Count - 1; i >= 0; i--)
+        {
+            <tr>
+                <td>@Model.Gelenler[i].Mesaj</td>
+                <td>@Model.Gelenler[i].Tarih</td>
+            </tr>
+        }
+        
+    </table>
+</div>
+
+
+
+
+
+
+
+
+<div class="modal" id="Modal1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 class="modal-title">Mesaj Gönder</h2>
+
+            </div>
+
+            @using (Html.BeginForm("Mesaj", "Ogrenci_Mesaj", FormMethod.Post))
+            {
+
+                <div class="modal-body">
+
+                    <label>
+
+                        Mesajınız:
+
+                    </label> <br />
+
+                    @Html.TextAreaFor(m => m.m)
+
+                    <br />
+
+                    <button type="submit" class="btn btn-info" style="float:right">Gönder</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right; margin-right: 10px">Vazgeç</button>
+
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+<script src="~/Scripts/jquery-3.4.1.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])

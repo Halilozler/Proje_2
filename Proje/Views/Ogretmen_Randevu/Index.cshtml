@@ -1,0 +1,62 @@
+﻿
+@using Proje.Models.OgretmenRandevu
+@model List<Ogretmen>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Ogretmen.cshtml";
+}
+
+@if (Model.Count != 0)
+{
+    <table class="table table-bordered">
+        <tr>
+            <th></th>
+            <th>Ders Adı</th>
+            <th></th>
+            <th>İptal Et</th>
+        </tr>
+        @foreach (var item in Model)
+        {
+            <tr>
+                @if (DateTime.Now.AddMinutes(10) >= item.BirleşikTarih)
+                {
+                    <td>
+                        <a href="@item.Link" class="btn btn-success">Dersi Başlat</a>
+                    </td>
+                }
+                else
+                {
+                    <td></td>
+                }
+                <td>@item.Ad</td>
+                <td>
+                    <table>
+                        <tr>
+                            <td class="col-sm-1 col-md-10"><h4>Tarihi: </h4>  @(item.Tarih)</td>
+                            <td style="float:right"> <h4>Saati: </h4>  @(item.Saat)</td>
+                        </tr>
+                    </table>
+                </td>
+                <td>
+                    @if (DateTime.Now.AddMinutes(10) < item.BirleşikTarih)
+                    {
+                         <a href="/Ogretmen_Randevu/Sil/@item.Id" class="btn btn-danger">İptal Et</a>
+                    }
+                </td>
+            </tr>
+        }
+    </table>
+}
+else
+{
+    <h3>Randevu Aldığın Ders Yok</h3>
+}
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])
+
+
+
+
+

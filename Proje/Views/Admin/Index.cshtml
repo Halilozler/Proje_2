@@ -1,0 +1,100 @@
+﻿@model Proje.Models.admin.AdminClass
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+    ViewBag.deger = 0;
+}
+
+@if (Model.onlineDers.Count != 0)
+{
+    <div style="display:none">
+        @(ViewBag.deger++)
+    </div>
+
+    <table class="table table-bordered">
+        <h3>Aktif Dersler</h3>
+        <tr>
+            <th>Ders Adı</th>
+            <th>Öğretmen Adı</th>
+            <th>Başladığı Saat</th>
+            <th>Bitiş Saati</th>
+        </tr>
+        @foreach (var item in Model.onlineDers)
+        {
+            <tr>
+                <td>@item.tbl_YapılacakDers.tbl_Ders.Ders_Adı</td>
+                <td>@item.tbl_YapılacakDers.tbl_Ders.tbl_Ogretmen.Ogretmen_Ad @item.tbl_YapılacakDers.tbl_Ders.tbl_Ogretmen.Ogretmen_Soyad</td>
+                <td>@item.tbl_YapılacakDers.Tarih_Saat</td>
+                <td>@item.tbl_YapılacakDers.Kapama</td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.yapılacakders.Count != 0)
+{
+    <div style="display:none">
+        @(ViewBag.deger++)
+    </div>
+    <table class="table table-bordered">
+        <h3>Randevular</h3>
+        <tr>
+            <th>Ders Adı</th>
+            <th>Öğretmen Adı</th>
+            <th>Dersin Başlama Zamanı</th>
+            <th>İptal Et</th>
+        </tr>
+        @foreach (var item in Model.yapılacakders)
+        {
+            <tr>
+                <td>@item.tbl_Ders.Ders_Adı</td>
+                <td>@item.tbl_Ders.tbl_Ogretmen.Ogretmen_Ad @item.tbl_Ders.tbl_Ogretmen.Ogretmen_Soyad</td>
+                <td>@item.Tarih_Saat</td>
+                <td>
+                    <a href="/Admin/Sil/@item.YapılacakDers_id" class="btn btn-danger">İptal Et</a>
+                </td>
+            </tr>
+        }
+    </table>
+}
+
+@if (Model.IptalDersler.Count != 0)
+{
+    <div style="display:none">
+        @(ViewBag.deger++)
+    </div>
+    <table class="table table-bordered">
+        <h3>İptal Edilen Randevular(Haftalık Güncelenir)</h3>
+        <tr>
+            <th>Ders Adı</th>
+            <th>Öğretmen Adı</th>
+            <th>Dersin Başlama Zamanı</th>
+        </tr>
+        @for (int i = Model.IptalDersler.Count - 1 ; i >= 0; i--)
+        {
+            <tr>
+                <td>@Model.IptalDersler[i].tbl_Ders.Ders_Adı</td>
+                <td>@Model.IptalDersler[i].tbl_Ders.tbl_Ogretmen.Ogretmen_Ad @Model.IptalDersler[i].tbl_Ders.tbl_Ogretmen.Ogretmen_Soyad</td>
+                <td>@Model.IptalDersler[i].Tarih_Saat</td>
+            </tr>
+
+        }
+       
+    </table>
+}
+
+@if (ViewBag.deger == 0)
+{
+    <h3>Hiç Randevuda Ders Yok</h3>
+}
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])
+
+
+
+
+
+

@@ -1,0 +1,247 @@
+﻿@model Proje.Models.admin.OgretmenClass
+@using Proje.Models.EntityFramework
+
+@{
+    ViewBag.Title = "Admin";
+    Layout = "~/Views/Shared/_Admin.cshtml";
+}
+
+
+
+<table class="table table-bordered">
+    <tr>
+        <th>Öğretmen Adı</th>
+        <th>Verdiği Dersler</th>
+        <th>Ders Ekle</th>
+        <th>Ders Kaldır</th>
+    </tr>
+    @foreach (var item in Model.List_Ogretmen)
+    {
+        <tr>
+            <td>@item.Ogretmen_Ad @item.Ogretmen_Soyad</td>
+            @foreach (var a in Model.List_ders)
+            {
+                if (a.Ogretmen_id == item.Ogretmen_id)
+                {
+                    ViewBag.dersler += a.Ders_Adı + "  •  ";
+                }
+            }
+            <td>@ViewBag.dersler </td>
+            @(ViewBag.dersler = string.Empty)
+            <td>
+                <a class="view btn btn-success" id="@item.Ogretmen_id" data-target="/Admin/O_DersEkle/@item.Ogretmen_id">Ders Ekle</a>
+            </td>
+            <td>
+                <a class="view2 btn btn-danger" id="@item.Ogretmen_id" data-target="/Admin/O_DersSil/@item.Ogretmen_id">Dersini Sil</a>
+            </td>
+        </tr>
+    }
+</table>
+
+<br />
+
+<div style="float:right">
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal1">
+
+        Öğretmen Ekle
+
+    </button>
+
+    <button type="button" class="btn btn-success" data-toggle="modal" data-target="#Modal2">
+
+        Yeni Ders Ekle
+
+    </button>
+</div>    @*Altaki Buttonlar*@
+
+
+
+@*Öğretmen Ekleme Pop Up*@
+<div class="modal" id="Modal1">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h2 class="modal-title">Yeni Öğretmen Ekle</h2>
+            </div>
+
+            @using (Html.BeginForm("Ogretmen_Ekleme", "Admin", FormMethod.Post))
+            {
+
+                <div class="modal-body">
+
+                    <label>Öğretmen Adı: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Ogretmen_Ad, new { placeholder = "Öğretmen Adı", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Ogretmen_Ad, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Öğretmen Soyadı: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Ogretmen_Soyad, new { placeholder = "Öğretmen Soyadı", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Ogretmen_Soyad, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Kullanıcı Adı: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Ogretmen_KullanıcıAdı, new { placeholder = "Kullanıcı Adı", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Ogretmen_KullanıcıAdı, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Şifre: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Ogretmen_Sifre, new { placeholder = "Şifre", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Ogretmen_Sifre, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Bölüm: </label>
+                    @Html.DropDownListFor(x => x.ogretmen.Bolum_id, (List<SelectListItem>)ViewBag.bolum,
+                    new { @class = "form-control" })
+
+                    <br />
+                    <label>Zoom Api Secret: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Api_secret, new { placeholder = "Zoom Api Secret", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Api_secret, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Zoom Api Key: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Api_Key, new { placeholder = "Zoom Api Key", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Api_Key, "", new { @style = "color:red" })
+
+                    <br />
+                    <label>Zoom Client: </label>
+                    @Html.TextBoxFor(x => x.ogretmen.Client, new { placeholder = "Zoom Client", @class = "form-control" })
+                    @Html.ValidationMessageFor(x => x.ogretmen.Client, "", new { @style = "color:red" })
+
+                    <br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Vazgeç</button>
+                    <button type="submit" class="btn btn-info" style="float: right; margin-right: 10px">Kaydet</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+
+@*Öğretmene Yeni Ders Ekleme*@
+<div class="modal" id="Modal2">
+
+    <div class="modal-dialog">
+
+        <div class="modal-content">
+
+            <div class="modal-header">
+
+                <h2 class="modal-title">Yeni Ders Ekle</h2>
+
+            </div>
+
+            @using (Html.BeginForm("Ogretmen_Listesi", "Admin", FormMethod.Post))
+            {
+
+                <div class="modal-body">
+
+                    <label>Öğretmen Adı Soyadı</label>
+                    @Html.DropDownListFor(x => x.ders.Ogretmen_id, (List<SelectListItem>)ViewBag.ogr,
+                    new { @class = "form-control" })
+
+                    <br />
+                    <label>Ders Adı Gir</label>
+                    @Html.TextBoxFor(x => x.ders.Ders_Adı, new { placeholder = "Ders Adı", @class = "form-control" })
+
+                    <br />
+                    <label>Öğretim Seç</label>
+                    @Html.DropDownListFor(x => x.ders.Ogretim_id, (List<SelectListItem>)ViewBag.ogretim,
+                    new { @class = "form-control" })
+
+                    <br />
+                    <button type="button" class="btn btn-danger" data-dismiss="modal" style="float:right">Vazgeç</button>
+                    <button type="submit" class="btn btn-info" style="float: right; margin-right: 10px">Kaydet</button>
+                </div>
+            }
+        </div>
+
+    </div>
+
+</div>
+
+<div class="modal fade" id="modelView" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form method="post" action="O_Ekle">
+                <div class="modal-body">
+                    @*dinamik yapı buraya geliyor*@
+                </div>
+                <div class="modal-footer"></div>
+            </form>
+        </div>
+    </div>
+</div>     @*Öğretmen Ders Ekleme PopUp*@
+
+<div class="modal fade" id="modelView2" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">x</span>
+                </button>
+            </div>
+            <form method="post" action="O_Sil">
+                <div class="modal-body">
+                    @*dinamik yapı buraya geliyor*@
+                </div>
+                <div class="modal-footer">
+                    <button type="submit" class="btn btn-info">Sil</button>
+
+                    <button type="button" class="btn btn-danger" data-dismiss="modal">Vazgeç</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>    @*Öğretmen Ders Silme PopUp*@
+
+<script src="~/Scripts/jquery-3.6.0.min.js"></script>
+<script src="~/Scripts/bootstrap.js"></script>
+@Html.Raw(TempData["msg"])
+
+<script>
+    $(function () {
+        $("body").on("click", ".view", function () {
+            var url = $(this).data("target");
+
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#modelView .modal-body").html(data);
+                    $("#modelView").modal("show");
+                })
+                .fail(function () {
+                    $("#modelView .modal-body").text("Error!!");
+                    $("#modelView").modal("show");
+                })
+        });
+    })
+</script>
+
+<script>
+    $(function () {
+        $("body").on("click", ".view2", function () {
+            var url = $(this).data("target");
+
+            $.post(url, function (data) { })
+                .done(function (data) {
+                    $("#modelView2 .modal-body").html(data);
+                    $("#modelView2").modal("show");
+                })
+                .fail(function () {
+                    $("#modelView2 .modal-body").text("Error!!");
+                    $("#modelView2").modal("show");
+                })
+        });
+    })
+</script>
+
